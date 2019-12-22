@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title>Maze得点計算</title>
+      <link rel="stylesheet" type="text/css" href="scoring_Maze.css">
+   </head>
+   <body>
+      <table>
+         <tr>
+            <th>得点項目</th>
+            <th>クリア数</th>
+            <th>得点</th>
+         </tr>
+         <tr>
+            <td>減速バンプ</td>
+            <td><input type="number" id="bump" value="0" min="0"></td>
+            <td><input readonly type="text" id="score_bump" value="0"></td>
+         </tr>
+         <tr>
+            <td>チェックポイント</td>
+            <td><input type="number" id="checkpoint" value="0" min="0"></td>
+            <td><input readonly type="text" id="score_checkpoint" value="0"></td>
+         </tr>
+         <tr>
+            <td>傾斜路(下り)</td>
+            <td><input type="number" id="downslope" value="0" min="0"></td>
+            <td><input readonly type="text" id="score_downslope" value="0"></td>
+         </tr>
+         <tr>
+            <td>傾斜路(上り)</td>
+            <td><input type="number" id="upslope" value="0" min="0"></td>
+            <td><input readonly type="text" id="score_upslope" value="0"></td>
+         </tr>
+      </table><br>
+
+      <table id="table_victim">
+         <caption>被災者に関する得点</caption>
+         <thead>
+            <tr>
+               <th>被災者のタイプ</th>
+               <th>配置</th>
+               <th>発見</th>
+               <th>レスキューキットの配置数</th>
+               <th>得点</th>
+               <th>追加/削除</th>
+            </tr>
+         </thead>   
+         <!--▼改行しない▼-->
+         <tbody id="tbody_victim"><tr><td><select onchange="changingMax(this)"><option value="heated" selected>熱を発する被災者</option><option value="harmed">傷ついた被災者</option><option value="stable">しっかりした被災者</option><option value="unharmed">無傷な被災者</option></select></td><td><select><option value="linear" selected>リニアウォールのタイル</option><option value="other">その他のタイル</option></select></td><td><input type="checkbox" id="finded" value="0"></td><td><input type="number" value="0" min="0" max="1"></td><td>0</td><td><input type="button" value="+" onclick="addList(this);" />　<input type="button" value="-" onclick="removeList(this);" /></td></tr></tbody>
+         <!--▲改行しない▲-->
+      </table>
+      <p>競技進行の停止数<input type="number" value="0" min="0" id="number_stop"></p>
+      <p>リライアビリティボーナス<input type="number" readonly id="score_reliabilityBonus" value="0"></p>
+      <p><input type="checkbox" id="escape">脱出成功</p>
+      <p>脱出成功得点<input type="number" readonly value="0" id="score_escape"></p>
+
+      誤発見の回数<input type="number" min="0" id="misidentification_number"><br>
+      誤発見による減点<input type="number" readonly id="score_misidentification"><br>
+
+      <p>合計得点<input type="button" value="計算" onclick="calculateTotal()"><input readonly type="text" id="score_all"></p>
+      <script type="text/javascript" src="scoring_Maze.js"></script>
+   </body>
+</html>
